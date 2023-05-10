@@ -1,0 +1,109 @@
+<input type="file" (change)="handleFileInput($event)">
+
+
+<div class="row">
+  <div class="col-12">
+    <table class="table  table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>carId</th>
+        <th>licenseDate</th>
+        <th>testDate </th>
+        <th>riskMatDate</th>
+        <th>weight</th>
+        <th>category</th>
+        <th>status</th>
+        <th>note</th>
+        <th>action</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <!-- <tr *ngFor="let record of data;let i= index"> -->
+        <!-- <tr [class.coming-soon]="record.isComingSoon" *ngFor="let record of sortedData"> -->
+          <!-- [ngClass]="{ 'expired-row': isExpired(record) }" -->
+      <tr  *ngFor="let record of sortedData" [class.coming-soon]="comingSoon(record)" >
+        <td (dblclick)="onEdit(record,'carId')">
+          <div class="row" *ngIf="record.editFieldName == 'carId'">
+            <div class="col-9">
+              <input type="text" [(ngModel)]="record.carId" class="form-control"/>
+            </div>
+            <div class="col-3 text-center">
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              <i class="fa fa-times ml-2 " aria-hidden="true" (click)="close(record)"></i>
+            </div>
+          </div>
+          <div *ngIf="record.editFieldName !== 'carId'">
+            {{record.carId}}
+          </div>
+        </td>
+        <td (dblclick)="onEdit(record,'licenseDate')">
+          <div *ngIf="record.editFieldName == 'licenseDate'">
+            <input type="text" [(ngModel)]="record.licenseDate" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'licenseDate'">
+            {{record.licenseDate}}
+          </div>
+        </td>
+        <td (dblclick)="onEdit(record,'testDate')">
+          <div *ngIf="record.editFieldName == 'testDate'">
+            <input type="text" [(ngModel)]="record.testDate" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'testDate'">
+            {{record.testDate}}     
+          </div>
+        </td>
+        <td (dblclick)="onEdit(record,'riskMatDate')">
+          <div *ngIf="record.editFieldName == 'riskMatDate'">
+            <input type="text" [(ngModel)]="record.riskMatDate" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'riskMatDate'">
+            {{record.riskMatDate}}
+          </div>
+        </td>
+        <td (dblclick)="onEdit(record,'weight')">
+          <div *ngIf="record.editFieldName == 'weight'">
+            <input type="text" [(ngModel)]="record.weight" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'weight'">
+            {{record.weight}}
+          </div>
+        </td>
+        <td (dblclick)="onEdit(record,'category')">
+          <div *ngIf="record.editFieldName == 'category'">
+            <input type="text" [(ngModel)]="record.category" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'category'">
+            {{record.category}}
+          </div>
+        </td>
+
+        <td (dblclick)="onEdit(record,'status')">
+          <div *ngIf="record.editFieldName == 'status'">
+            <input type="text" [(ngModel)]="record.status" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'status'">
+            {{record.status}}
+          </div>
+        </td>
+
+        <td (dblclick)="onEdit(record,'note')">
+          <div *ngIf="record.editFieldName == 'note'">
+            <input type="text" [(ngModel)]="record.note" class="form-control"/>
+          </div>
+          <div *ngIf="record.editFieldName !== 'note'">
+            {{record.note}}
+          </div>
+        </td>
+        <td>
+          <button [disabled]="isDisable" (click)="updateLocalStorage(record)">עדכן</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<button class="btn btn-primary" (click)="addRow()">Add Row</button>
+<button class="btn btn-danger" (click)="deleteRow()">Delete Row</button>
+<button class="btn btn-primary" (click)="downloadExcel()">Download Excel</button>
+
