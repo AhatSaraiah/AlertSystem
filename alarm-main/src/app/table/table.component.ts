@@ -125,9 +125,9 @@ export class TableComponent implements OnInit {
     const diffRiskDays = riskMatDate - today;
     const diffLicenseDays = licenseDate - today;
 
-        // Check if the difference is less than or equal to 30 days (i.e., coming soon)
-
-    if (diffTestDays <= month|| diffWeightDays <= month ||diffRiskDays <= month || diffLicenseDays <= month) 
+  // Check if the difference is less than or equal to 30 days (i.e., coming soon)
+    
+    if ((diffTestDays <= month&& diffTestDays>0)||( diffWeightDays <= month && diffWeightDays>0)||(diffRiskDays <= month && diffRiskDays>0) || (diffLicenseDays <= month && diffLicenseDays>0)) 
         return true;
     return false;
  
@@ -237,6 +237,8 @@ export class TableComponent implements OnInit {
       this.data.splice(index, 1);
     }
   }
+
+  
   downloadExcel() {
     if(this.sortedData){
       const worksheet = XLSX.utils.json_to_sheet(this.sortedData);

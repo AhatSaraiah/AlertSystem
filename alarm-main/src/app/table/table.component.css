@@ -17,7 +17,7 @@ th {
   padding: 10px;
   text-align: center;
   font-size: 20px;
-  background-color: rgb(149, 149, 149);
+  background-color: rgb(169, 155, 155);
 }
 
 
@@ -35,8 +35,8 @@ h1 {
 
   .coming-soon {
     font-size: 16px;
-    background-color: rgb(148, 130, 96);
-    border: 2px solid red;
+    background-color: rgb(185, 142, 109);
+    border: 2px solid rgb(100, 66, 66);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px; 
