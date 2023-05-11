@@ -38,8 +38,6 @@ export class TableComponent implements OnInit {
     this.data.sort(this.sortByriskMatDate);
     this.sortedData =this.data.sort(this.sortByTestDate);
 
-   // this.sortedData = [...this.data].sort(this.sortByTestDate);
-
     // Calculate coming soon status for each row
     this.sortedData?.forEach(row => {
       row.isComingSoon = this.comingSoon(row);
@@ -109,7 +107,6 @@ export class TableComponent implements OnInit {
 
 
   comingSoon(row: TableModel): boolean {
-  //  const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
     const today = new Date().getTime();
     
     const licenseDate = new Date(row.licenseDate).getTime();
@@ -134,27 +131,24 @@ export class TableComponent implements OnInit {
         return true;
     return false;
  
-
-    // if (diffTestDays <= 30|| diffWeightDays <= 30 ||diffRiskDays <= 30 || diffLicenseDays <= 30) 
-    //     return true;
-    // if (diffWeightDays <= 30)
-    //     return true;
-    // if (diffRiskDays <= 30)
-    //     return true;
-    // if (diffLicenseDays <= 30)
-    //     return true;
-    
-    // return false;
   }
   
 
   
  onUpdateExpired(){
     const expiredData =this.sortedData?.filter((row) => this.isExpired(row));
+    const nonExpiredData =this.sortedData?.filter((row) => !this.isExpired(row));
+
     expiredData?.forEach(row =>{
-        row.status = '!Date expired';
+        row.status = 'פג תוקף!';
         row.isExpired=true;
     });
+    nonExpiredData?.forEach(row =>{
+      if(this.comingSoon(row)){
+        row.status = 'תאריך יפוג בקרוב!';
+      }
+    
+  });
  }
   
   isExpired(row: TableModel): boolean {

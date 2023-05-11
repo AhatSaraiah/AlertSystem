@@ -74,7 +74,7 @@
           </div>
         </td>
 
-        <td class="status" (dblclick)="onEdit(record,'status')" [ngClass]="{ 'expired-row': isExpired(record) }">
+        <td class="status" (dblclick)="onEdit(record,'status')" [ngClass]="{ 'flick': isExpired(record) }">
           <div *ngIf="record.editFieldName == 'status'">
             <input type="text" [(ngModel)]="record.status" class="form-control"/>
           </div>
@@ -105,6 +105,5 @@
 </div>
 <input type="file" (change)="handleFileInput($event)">
 <!-- <button class="btn btn-primary" (click)="addRow()">Add Row</button> -->
-<!-- <button class="btn btn-danger" (click)="deleteRow()">Delete Row</button> -->
 <button class="btn btn-primary" (click)="downloadExcel()">Download Excel</button>
 

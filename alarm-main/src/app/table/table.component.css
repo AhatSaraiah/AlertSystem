@@ -16,17 +16,11 @@ th {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   background-color: rgb(149, 149, 149);
 }
 
-/* td.stats {
-  text-shadow: 2px 2px;
-} */
 
-/* tr:nth-child(even) td {
-  background-color: #f2f2f2;
-}  */
 
 
 h1 {
@@ -40,8 +34,8 @@ h1 {
 }
 
   .coming-soon {
-    font-size: 20px;
-    background-color: orange;
+    font-size: 16px;
+    background-color: rgb(148, 130, 96);
     border: 2px solid red;
     text-align: center;
     text-transform: uppercase;
@@ -54,4 +48,22 @@ h1 {
 }
 
 
+.flick , td.status {
+  animation-name: flick;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  font-size: 18px;
+  text-align: center;
+  font-family: tahoma;
+}
+
+@keyframes flick {
+  0% {
+    text-shadow: none
+  }
+  
+  50% {
+    text-shadow: 0 0 8px red;
+  }
+}
 
