@@ -20,33 +20,14 @@ th {
   background-color: rgb(169, 155, 155);
 }
 
-
-
-
-h1 {
-  display: block;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-  font-size: 22px;
-}
-
-  .coming-soon {
-    font-size: 16px;
-    background-color: rgb(185, 142, 109);
-    border: 2px solid rgb(100, 66, 66);
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px; 
-    }  
-
-
- .expired-row {
-  font-weight: bold;
-}
-
+.coming-soon {
+  font-size: 16px;
+  background-color: rgb(185, 142, 109);
+  border: 2px solid rgb(109, 43, 43);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px; 
+  }  
 
 .flick , td.status {
   animation-name: flick;
