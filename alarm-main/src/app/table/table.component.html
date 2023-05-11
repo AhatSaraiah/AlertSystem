@@ -1,28 +1,24 @@
-<input type="file" (change)="handleFileInput($event)">
-
 
 <div class="row">
   <div class="col-12">
     <table class="table  table-striped table-bordered table-hover">
       <thead>
       <tr>
-        <th>carId</th>
-        <th>licenseDate</th>
-        <th>testDate </th>
-        <th>riskMatDate</th>
-        <th>weight</th>
-        <th>category</th>
-        <th>status</th>
-        <th>note</th>
-        <th>action</th>
+        <th>מספר רכב</th>
+        <th>תאריך רשיון</th>
+        <th>תאריך טסט </th>
+        <th>חו''ס</th>
+        <th>כיול</th>
+        <th>קטגוריה</th>
+        <th>סטטוס</th>
+        <th>הערות</th>
+        <th>מחיקת שורה</th>
+        <th>עדכון</th>
       </tr>
       </thead>
       <tbody>
-      
-      <!-- <tr *ngFor="let record of data;let i= index"> -->
-        <!-- <tr [class.coming-soon]="record.isComingSoon" *ngFor="let record of sortedData"> -->
-          <!-- [ngClass]="{ 'expired-row': isExpired(record) }" -->
-      <tr  *ngFor="let record of sortedData" [class.coming-soon]="comingSoon(record)" >
+   
+      <tr *ngFor="let record of sortedData" [class.coming-soon]="comingSoon(record)">
         <td (dblclick)="onEdit(record,'carId')">
           <div class="row" *ngIf="record.editFieldName == 'carId'">
             <div class="col-9">
@@ -78,7 +74,7 @@
           </div>
         </td>
 
-        <td (dblclick)="onEdit(record,'status')">
+        <td class="status" (dblclick)="onEdit(record,'status')" [ngClass]="{ 'expired-row': isExpired(record) }">
           <div *ngIf="record.editFieldName == 'status'">
             <input type="text" [(ngModel)]="record.status" class="form-control"/>
           </div>
@@ -86,7 +82,7 @@
             {{record.status}}
           </div>
         </td>
-
+       
         <td (dblclick)="onEdit(record,'note')">
           <div *ngIf="record.editFieldName == 'note'">
             <input type="text" [(ngModel)]="record.note" class="form-control"/>
@@ -95,6 +91,10 @@
             {{record.note}}
           </div>
         </td>
+         <!-- Add delete button here -->
+  <td>
+    <button [disabled]="isDisable" (click)="deleteRow(record)">מחק</button>
+  </td>
         <td>
           <button [disabled]="isDisable" (click)="updateLocalStorage(record)">עדכן</button>
         </td>
@@ -103,7 +103,8 @@
     </table>
   </div>
 </div>
-<button class="btn btn-primary" (click)="addRow()">Add Row</button>
-<button class="btn btn-danger" (click)="deleteRow()">Delete Row</button>
+<input type="file" (change)="handleFileInput($event)">
+<!-- <button class="btn btn-primary" (click)="addRow()">Add Row</button> -->
+<!-- <button class="btn btn-danger" (click)="deleteRow()">Delete Row</button> -->
 <button class="btn btn-primary" (click)="downloadExcel()">Download Excel</button>
 

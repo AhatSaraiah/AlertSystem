@@ -12,6 +12,7 @@ export class TableModel {
   public isExpired?: boolean;
   constructor() {
     Object.assign(this, {}, {});
+    this.isComingSoon=false;
     this.licenseDate=new Date();
     this.testDate=new Date();
     this.riskMatDate=new Date();

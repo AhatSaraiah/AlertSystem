@@ -11,7 +11,6 @@ import * as FileSaver from 'file-saver';
 export class TableComponent implements OnInit {
 
   element?: string;
- // public editMode = false;
   displayedColumns: string[] = ["carId", "licenseDate", "testDate", "riskMatDate", "weight", "category", "status", "note", "action"];
   today = new Date();
   tableWithStatus?: any[][];
@@ -33,7 +32,32 @@ export class TableComponent implements OnInit {
     }
   }
 
+  onUpdateIsComingSoon() {
+    this.data.sort(this.sortByWeightDate);
+    this.data.sort(this.sortBylicenseDate);
+    this.data.sort(this.sortByriskMatDate);
+    this.sortedData =this.data.sort(this.sortByTestDate);
 
+   // this.sortedData = [...this.data].sort(this.sortByTestDate);
+
+    // Calculate coming soon status for each row
+    this.sortedData?.forEach(row => {
+      row.isComingSoon = this.comingSoon(row);
+    });
+
+    // Sort the data by coming soon status
+    this.sortedData?.sort((a, b) => {
+      if (a.isComingSoon && !b.isComingSoon) {
+        return -1;
+      } else if (!a.isComingSoon && b.isComingSoon) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.data=this.sortedData;
+  }
+  
   sortByTestDate(a: TableModel, b: TableModel): number {
     const aDate = new Date(a.testDate);
     const bDate = new Date(b.testDate);
@@ -46,6 +70,7 @@ export class TableComponent implements OnInit {
     return 0;
   }
   sortByWeightDate(a: TableModel, b: TableModel): number {
+
     const aDate = new Date(a.weight);
     const bDate = new Date(b.weight);
     if (aDate < bDate) {
@@ -57,69 +82,77 @@ export class TableComponent implements OnInit {
     return 0;
   }
 
-  
+  sortBylicenseDate(a: TableModel, b: TableModel): number {
+
+    const aDate = new Date(a.licenseDate);
+    const bDate = new Date(b.licenseDate);
+    if (aDate < bDate) {
+      return -1;
+    }
+    if (aDate > bDate) {
+      return 1;
+    }
+    return 0;
+  }
+  sortByriskMatDate(a: TableModel, b: TableModel): number {
+
+    const aDate = new Date(a.riskMatDate);
+    const bDate = new Date(b.riskMatDate);
+    if (aDate < bDate) {
+      return -1;
+    }
+    if (aDate > bDate) {
+      return 1;
+    }
+    return 0;
+  }
+
 
   comingSoon(row: TableModel): boolean {
-    const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
+  //  const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
     const today = new Date().getTime();
     
     const licenseDate = new Date(row.licenseDate).getTime();
     const testDate = new Date(row.testDate).getTime();
     const riskMatDate = new Date(row.riskMatDate).getTime();
     const weightDate = new Date(row.weight).getTime();
-    
+    const month = 1000 * 60 * 60 * 24 * 30;
+
+
     // Check if testDate is in the past
-    if (testDate < today ) {
+    if (testDate < today) {
       return false;
     }
-    
-    // Calculate the difference in days between today and testDate, today and weightDate
-    const diffTestDays = Math.round((testDate - today) / oneDay);
-    const diffWeightDays = Math.round((weightDate - today) / oneDay);
-    
-    // // Check if the difference is greater than or equal to 30 days (i.e., not expired)
-    // if (diffTestDays > 30 || diffWeightDays > 30) {
-    //   return false;
-    // }
-    
-    // Check if the difference is less than or equal to 30 days (i.e., coming soon)
-    if (diffTestDays <= 30 ) {
+    const diffTestDays = testDate - today;
+    const diffWeightDays = weightDate - today;
+    const diffRiskDays = riskMatDate - today;
+    const diffLicenseDays = licenseDate - today;
+
+        // Check if the difference is less than or equal to 30 days (i.e., coming soon)
+
+    if (diffTestDays <= month|| diffWeightDays <= month ||diffRiskDays <= month || diffLicenseDays <= month) 
         return true;
-    } if (diffWeightDays <= 30)
-        return true;
-    
     return false;
+ 
+
+    // if (diffTestDays <= 30|| diffWeightDays <= 30 ||diffRiskDays <= 30 || diffLicenseDays <= 30) 
+    //     return true;
+    // if (diffWeightDays <= 30)
+    //     return true;
+    // if (diffRiskDays <= 30)
+    //     return true;
+    // if (diffLicenseDays <= 30)
+    //     return true;
+    
+    // return false;
   }
   
 
-  onUpdateIsComingSoon() {
-    this.data.sort(this.sortByWeightDate);
-
-    this.sortedData = [...this.data].sort(this.sortByTestDate);
-
-    // Calculate coming soon status for each row
-    this.sortedData.forEach(row => {
-      row.isComingSoon = this.comingSoon(row);
-    });
-
-    // Sort the data by coming soon status
-    this.sortedData.sort((a, b) => {
-      if (a.isComingSoon && !b.isComingSoon) {
-        return -1;
-      } else if (!a.isComingSoon && b.isComingSoon) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-  }
-
-  
   
  onUpdateExpired(){
     const expiredData =this.sortedData?.filter((row) => this.isExpired(row));
     expiredData?.forEach(row =>{
-        row.status = 'Date expired!';
+        row.status = '!Date expired';
         row.isExpired=true;
     });
  }
@@ -130,9 +163,8 @@ export class TableComponent implements OnInit {
     const riskMatDate = new Date(row.riskMatDate);
     const testDate = new Date(row.testDate);
     const weight = new Date(row.weight);
-
+ 
     return licenseDate < currentDate || weight < currentDate || riskMatDate < currentDate || testDate < currentDate;
-    //return testDate <= currentDate;
 
   }
   
@@ -169,16 +201,13 @@ export class TableComponent implements OnInit {
           const data = new TableModel();
           data.carId = row[0];
           data.licenseDate = row[1];
-      //    data.testDate = new Date(Date.parse(row[2]));
-
           data.testDate = row[2];
           data.riskMatDate = row[3];
           data.weight = row[4];
           data.category = row[5];
           data.status = row[6];
           data.note = row[7];
-          data.isComingSoon=false;
-          data.isExpired=false;
+  
           return data;
         });
         console.log(this.data)
@@ -208,13 +237,11 @@ export class TableComponent implements OnInit {
     this.isDisable = true;
   }
 
-  addRow() {
-    const newRow = new TableModel();
-    this.data?.splice( this.data.length + 1, 0, newRow);
-    
-  }
-  deleteRow() {
-    this.data?.splice(this.data.length-1, 1);
+  deleteRow(record: TableModel) {
+    const index = this.data.indexOf(record);
+    if (index !== -1) {
+      this.data.splice(index, 1);
+    }
   }
   downloadExcel() {
     if(this.sortedData){
