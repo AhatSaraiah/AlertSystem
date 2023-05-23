@@ -24,7 +24,7 @@ npm install
 
 ## Usage
 1. Launch the development server by running the following command:
-ng serve
+- ng serve
 2. Open your preferred web browser and visit http://localhost:4200.
 3. Upload an Excel file containing vehicle data using the provided interface.
 4. View the dynamically generated table, sorted by the nearest expiration date.
