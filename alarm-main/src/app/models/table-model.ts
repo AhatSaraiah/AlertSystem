@@ -1,6 +1,7 @@
 export class TableModel {
   public carId?: string;
-  public licenseDate: Date;
+  public driverName?: string;
+  public insuranceDate: Date;
   public testDate: Date;
   public riskMatDate: Date;
   public weight: Date;
@@ -13,7 +14,7 @@ export class TableModel {
   constructor() {
     Object.assign(this, {}, {});
     this.isComingSoon=false;
-    this.licenseDate=new Date();
+    this.insuranceDate=new Date();
     this.testDate=new Date();
     this.riskMatDate=new Date();
     this.weight=new Date();

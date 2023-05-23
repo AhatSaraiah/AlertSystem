@@ -45,13 +45,14 @@ export class TableComponent implements OnInit {
         this.data = this.element_data.map((row: any) => {
           const data = new TableModel();
           data.carId = row[0];
-          data.licenseDate = row[1];
-          data.testDate = row[2];
-          data.riskMatDate = row[3];
-          data.weight = row[4];
-          data.category = row[5];
-          data.status = row[6];
-          data.note = row[7];
+          data.driverName = row[1];
+          data.insuranceDate = row[2];
+          data.testDate = row[3];
+          data.riskMatDate = row[4];
+          data.weight = row[5];
+          data.category = row[6];
+          data.status = row[7];
+          data.note = row[8];
           return data;
         });
         localStorage.setItem("tableNew", JSON.stringify(this.data));
@@ -79,7 +80,7 @@ export class TableComponent implements OnInit {
   onUpdateIsComingSoon() {
     this.data.sort(this.sortByDate('weight'));
     this.data.sort(this.sortByDate('riskMatDate'));
-    this.data.sort(this.sortByDate('licenseDate'));
+    this.data.sort(this.sortByDate('insuranceDate'));
     this.sortedData =this.data.sort(this.sortByDate('testDate'));
     // Calculate coming soon status for each row
     this.sortedData?.forEach(row => {
@@ -115,7 +116,7 @@ export class TableComponent implements OnInit {
 
   comingSoon(row: TableModel): boolean {
     const today = new Date().getTime();
-    const licenseDate = new Date(row.licenseDate).getTime();
+    const insuranceDate = new Date(row.insuranceDate).getTime();
     const testDate = new Date(row.testDate).getTime();
     const riskMatDate = new Date(row.riskMatDate).getTime();
     const weightDate = new Date(row.weight).getTime();
@@ -127,7 +128,7 @@ export class TableComponent implements OnInit {
     const diffTestDays = testDate - today;
     const diffWeightDays = weightDate - today;
     const diffRiskDays = riskMatDate - today;
-    const diffLicenseDays = licenseDate - today;
+    const diffLicenseDays = insuranceDate - today;
   // Check if the difference is less than or equal to 30 days (i.e., coming soon)
     if ((diffTestDays <= month&& diffTestDays>0)||( diffWeightDays <= month && diffWeightDays>0)||(diffRiskDays <= month && diffRiskDays>0) || (diffLicenseDays <= month && diffLicenseDays>0)) 
         return true;
@@ -152,12 +153,12 @@ export class TableComponent implements OnInit {
   
   isExpired(row: TableModel): boolean {
     const currentDate = new Date();
-    const licenseDate = new Date(row.licenseDate);
+    const insuranceDate = new Date(row.insuranceDate);
     const riskMatDate = new Date(row.riskMatDate);
     const testDate = new Date(row.testDate);
     const weight = new Date(row.weight);
  
-    return licenseDate < currentDate || weight < currentDate || riskMatDate < currentDate || testDate < currentDate;
+    return insuranceDate < currentDate || weight < currentDate || riskMatDate < currentDate || testDate < currentDate;
   }
   
   onEdit(item: any, field: string) {
