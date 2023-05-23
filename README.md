@@ -7,13 +7,13 @@ Vehicle Management System
 The Vehicle Management System is a sophisticated landing page developed using TypeScript and Angular. It provides a comprehensive interface for managing and organizing vehicle data in a dynamic table format. Users can upload an Excel file containing vehicle information, and the system intelligently sorts the data based on the nearest expiration date. Vehicles with expiration dates within one month are highlighted with an approaching status, enabling users to easily identify and prioritize upcoming maintenance or renewals. The system also automatically detects and updates the status of expired dates.
 
 ## Features
-Dynamic Table: Display and visualize vehicle data in a user-friendly table format.
-Sorting: Sort the table based on the nearest expiration date, ensuring efficient management of upcoming tasks.
-Approaching Status: Highlight vehicles with expiration dates within one month, providing a visual indication of approaching deadlines.
-Automated Status Updates: Detect and update the status of expired dates automatically, ensuring accurate and real-time information.
-Data Manipulation: Update or delete existing rows as necessary, allowing users to maintain accurate and up-to-date records.
-Easy Data Input: Upload Excel files to populate the table with vehicle information seamlessly.
-Efficient Data Export: Save the table, including any modifications, as an Excel file for convenient storage or further analysis.
+- Dynamic Table: Display and visualize vehicle data in a user-friendly table format.
+- Sorting: Sort the table based on the nearest expiration date, ensuring efficient management of upcoming tasks.
+- Approaching Status: Highlight vehicles with expiration dates within one month, providing a visual indication of approaching deadlines.
+- Automated Status Updates: Detect and update the status of expired dates automatically, ensuring accurate and real-time information.
+- Data Manipulation: Update or delete existing rows as necessary, allowing users to maintain accurate and up-to-date records.
+- Easy Data Input: Upload Excel files to populate the table with vehicle information seamlessly.
+- Efficient Data Export: Save the table, including any modifications, as an Excel file for convenient storage or further analysis.
 
 ## Installation
 1. Clone the repository to your local machine.
