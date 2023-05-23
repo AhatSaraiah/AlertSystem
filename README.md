@@ -16,32 +16,32 @@ Easy Data Input: Upload Excel files to populate the table with vehicle informati
 Efficient Data Export: Save the table, including any modifications, as an Excel file for convenient storage or further analysis.
 
 ## Installation
-1.Clone the repository to your local machine.
-2.Navigate to the project directory.
-3.Install project dependencies by running the following command:
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install project dependencies by running the following command:
 npm install
 
 
 ## Usage
-1.Launch the development server by running the following command:
+1. Launch the development server by running the following command:
 ng serve
-2.Open your preferred web browser and visit http://localhost:4200.
-3.Upload an Excel file containing vehicle data using the provided interface.
-4.View the dynamically generated table, sorted by the nearest expiration date.
-5.Identify vehicles with approaching expiration dates, marked with an intuitive status indicator.
-6.Manage the data by updating or deleting rows as needed.
-7.Add new rows to the table using the dedicated functionality.
-8.Export the table, including any modifications, as an Excel file for convenient storage and sharing.
+2. Open your preferred web browser and visit http://localhost:4200.
+3. Upload an Excel file containing vehicle data using the provided interface.
+4. View the dynamically generated table, sorted by the nearest expiration date.
+5. Identify vehicles with approaching expiration dates, marked with an intuitive status indicator.
+6. Manage the data by updating or deleting rows as needed.
+7. Add new rows to the table using the dedicated functionality.
+8. Export the table, including any modifications, as an Excel file for convenient storage and sharing.
 
 
 ## Contributing
 Contributions are welcome! If you wish to contribute to this project, please follow these steps:
 
-1.Fork the repository.
-2.Create a new branch for your feature or bug fix.
-3.Make your modifications and commit your changes.
-4.Push your branch to your forked repository.
-5.Submit a pull request, explaining the purpose and changes of your contribution.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your modifications and commit your changes.
+4. Push your branch to your forked repository.
+5. Submit a pull request, explaining the purpose and changes of your contribution.
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
