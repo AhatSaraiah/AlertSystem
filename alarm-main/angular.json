@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "AlertSystem": {
+    "alarm-main": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/alert-system",
+            "outputPath": "dist/alarm-main",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AlertSystem:build:production"
+              "browserTarget": "alarm-main:build:production"
             },
             "development": {
-              "browserTarget": "AlertSystem:build:development"
+              "browserTarget": "alarm-main:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AlertSystem:build"
+            "browserTarget": "alarm-main:build"
           }
         },
         "test": {
